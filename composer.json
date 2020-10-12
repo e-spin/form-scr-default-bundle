@@ -1,0 +1,45 @@
+{
+  "name": "e-spin/form-scr-default-bundle",
+  "description": "Set default values for select, checkboxes or radio buttons to a form in Contao.",
+  "keywords": [
+    "contao",
+    "form",
+    "default",
+    "value",
+    "select",
+    "checkbox",
+    "radio button"
+  ],
+  "type": "contao-bundle",
+  "homepage": "https://www.e-spin.de",
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "e-spin",
+      "email": "info@e-spin.de",
+      "homepage": "https://www.e-spin.de",
+      "role": "Developer"
+    },
+    {
+      "name": "Kamil Kuzminski",
+      "email": "kamil.kuzminski@codefog.pl",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "contao/core-bundle": "^4.4",
+    "contao-community-alliance/contao-polyfill-bundle": "^1.1"
+  },
+  "require-dev": {
+    "contao/manager-plugin": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Espin\\FormNewsletterBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Espin\\FormScrDefaultBundle\\ContaoManager\\Plugin"
+  }
+}

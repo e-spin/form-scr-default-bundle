@@ -1,0 +1,7 @@
+services:
+  Espin\FormScrDefaultBundle\EventListener\FormInsertTags:
+    public: true
+    tags:
+      - name: contao.hook
+        hook: replaceInsertTags
+        method: replaceInsertTags
