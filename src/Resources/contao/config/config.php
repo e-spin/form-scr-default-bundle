@@ -15,8 +15,12 @@
 declare(strict_types=1);
 
 use Espin\FormScrDefaultBundle\Forms\FormSelectMenu;
+use Espin\FormScrDefaultBundle\Forms\FormCheckBox;
+use Espin\FormScrDefaultBundle\Forms\FormRadioButton;
 
 /**
- * Replace the default select menu
+ * Replace the default SCR.
  */
-$GLOBALS['TL_FFL']['select'] = FormSelectMenu::class;
+$GLOBALS['TL_FFL']['select']   = FormSelectMenu::class;
+$GLOBALS['TL_FFL']['checkbox'] = FormCheckBox::class;
+$GLOBALS['TL_FFL']['radio']    = FormRadioButton::class;
