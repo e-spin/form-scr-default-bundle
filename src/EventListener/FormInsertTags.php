@@ -38,11 +38,16 @@ class FormInsertTags
                 : $_SESSION['FORM_DATA'][$arrTag[1]];
         }
 
-        if ($arrTag[0] === 'form_rawvalue_get' && null !== Input::get($arrTag[1])) {
+        if ($arrTag[0] === 'form_rawvalue_get') {
+            if (null === Input::get($arrTag[1])) {
+                return '';
+            }
+
             $varValue = \str_getcsv(Input::get($arrTag[1]), ",");
 
             return \is_array($varValue) ? \serialize($varValue) : $varValue;
         }
+
 
         return false;
     }
