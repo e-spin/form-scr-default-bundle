@@ -16,10 +16,10 @@ declare(strict_types=1);
 
 namespace Espin\FormScrDefaultBundle\Forms;
 
-use Contao\RadioButton;
+use Contao\FormRadio;
 use Contao\System;
 
-class FormRadioButton extends RadioButton
+class FormRadioButton extends FormRadio
 {
     /**
      * Add specific attributes.

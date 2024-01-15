@@ -16,10 +16,10 @@ declare(strict_types=1);
 
 namespace Espin\FormScrDefaultBundle\Forms;
 
-use Contao\CheckBox;
+use Contao\FormCheckbox as Checkbox;
 use Contao\System;
 
-class FormCheckBox extends CheckBox
+class FormCheckBox extends Checkbox
 {
     /**
      * Add specific attributes.
