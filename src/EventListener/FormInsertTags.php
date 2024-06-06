@@ -24,11 +24,11 @@ class FormInsertTags
     /**
      * Replace the insert tags
      *
-     * @param mixed
+     * @param mixed $varTag
      *
      * @return mixed
      */
-    public function replaceInsertTags($varTag)
+    public function replaceInsertTags(mixed $varTag): mixed
     {
         $arrTag = StringUtil::trimsplit('::', $varTag);
 
@@ -39,15 +39,22 @@ class FormInsertTags
         }
 
         if ($arrTag[0] === 'form_rawvalue_get') {
-            if (null === Input::get($arrTag[1])) {
+            if (null === ($varValue = Input::get($arrTag[1]))) {
                 return '';
             }
 
-            $varValue = \str_getcsv(Input::get($arrTag[1]), ",");
+            $varValue = \str_getcsv($varValue, ",");
 
             return \is_array($varValue) ? \serialize($varValue) : $varValue;
         }
 
+        if ($arrTag[0] === 'form_rawvalue_post') {
+            if (null === ($varValue = Input::post($arrTag[1]))) {
+                return '';
+            }
+
+            return \is_array($varValue) ? \serialize($varValue) : $varValue;
+        }
 
         return false;
     }

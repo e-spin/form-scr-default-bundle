@@ -14,9 +14,11 @@
 
 declare(strict_types=1);
 
+use Contao\System;
 use Espin\FormScrDefaultBundle\Forms\FormSelectMenu;
 use Espin\FormScrDefaultBundle\Forms\FormCheckBox;
 use Espin\FormScrDefaultBundle\Forms\FormRadioButton;
+use Espin\FormScrDefaultBundle\Forms\ProtectFormSelectMenu;
 
 /**
  * Replace the default SCR.
@@ -24,3 +26,8 @@ use Espin\FormScrDefaultBundle\Forms\FormRadioButton;
 $GLOBALS['TL_FFL']['select']   = FormSelectMenu::class;
 $GLOBALS['TL_FFL']['checkbox'] = FormCheckBox::class;
 $GLOBALS['TL_FFL']['radio']    = FormRadioButton::class;
+
+$bundles = System::getContainer()->getParameter('kernel.bundles');
+if (\array_key_exists('PlentaProtectedSelectBundle', $bundles)) {
+    $GLOBALS['TL_FFL']['protectedselect'] = ProtectFormSelectMenu::class;
+}
