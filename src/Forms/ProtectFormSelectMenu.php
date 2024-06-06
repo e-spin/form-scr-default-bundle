@@ -16,10 +16,10 @@ declare(strict_types=1);
 
 namespace Espin\FormScrDefaultBundle\Forms;
 
-use Contao\FormRadio;
 use Contao\System;
+use Plenta\ProtectedSelect\Classes\FormProtectedSelectMenu;
 
-class FormRadioButton extends FormRadio
+class ProtectFormSelectMenu extends FormProtectedSelectMenu
 {
     /**
      * Add specific attributes.
@@ -27,7 +27,7 @@ class FormRadioButton extends FormRadio
      * @param string $strKey
      * @param mixed  $varValue
      */
-    public function __set($strKey, $varValue)
+    public function __set($strKey, $varValue): void
     {
         if ($strKey === 'value' && !\is_array($varValue)) {
             $varValue = System::getContainer()->get('contao.insert_tag.parser')?->replace($varValue);
