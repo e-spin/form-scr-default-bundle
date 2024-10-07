@@ -29,7 +29,7 @@ class FormCheckBox extends Checkbox
      */
     public function __set($strKey, $varValue)
     {
-        if ($strKey === 'value' && !\is_array($varValue)) {
+        if ($strKey === 'value' && null !== $varValue && !\is_array($varValue)) {
             $varValue = System::getContainer()->get('contao.insert_tag.parser')?->replace($varValue);
         }
 
