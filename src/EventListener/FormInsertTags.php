@@ -3,12 +3,12 @@
 /**
  * This file is part of e-spin/form-scr-default-bundle.
  *
- * Copyright (c) 2020-2024 e-spin
+ * Copyright (c) 2020-2025 e-spin
  *
  * @package   e-spin/form-scr-default-bundle
  * @author    Ingolf Steinhardt <info@e-spin.de>
  * @author    Kamil Kuzminski <kamil.kuzminski@codefog.pl>
- * @copyright 2020-2024 e-spin
+ * @copyright 2020-2025 e-spin
  * @license   LGPL-3.0-or-later
  */
 
@@ -16,11 +16,17 @@ declare(strict_types=1);
 
 namespace Espin\FormScrDefaultBundle\EventListener;
 
+use Contao\Form;
 use Contao\Input;
 use Contao\StringUtil;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class FormInsertTags
 {
+    public function __construct(private readonly RequestStack $requestStack)
+    {
+    }
+
     /**
      * Replace the insert tags
      *
@@ -33,9 +39,10 @@ class FormInsertTags
         $arrTag = StringUtil::trimsplit('::', $varTag);
 
         if ($arrTag[0] === 'form_rawvalue') {
-            return \is_array($_SESSION['FORM_DATA'][$arrTag[1]])
-                ? \serialize($_SESSION['FORM_DATA'][$arrTag[1]])
-                : $_SESSION['FORM_DATA'][$arrTag[1]];
+            $formRawValue = $this->requestStack->getCurrentRequest()?->getSession()
+                ->get(Form::SESSION_KEY)?->getValue()[$arrTag[1]] ?? '';
+
+            return \is_array($formRawValue) ? \serialize($formRawValue) : $formRawValue;
         }
 
         if ($arrTag[0] === 'form_rawvalue_get') {
