@@ -1,9 +1,17 @@
 services:
-  Espin\FormScrDefaultBundle\EventListener\FormInsertTags:
+  Espin\FormScrDefaultBundle\EventListener\FormInsertTagsListener:
     public: true
     arguments:
       - '@request_stack'
     tags:
       - name: contao.hook
         hook: replaceInsertTags
-        method: replaceInsertTags
+
+  Espin\FormScrDefaultBundle\EventListener\PrepareFormDataListener:
+    public: true
+    arguments:
+      - '@request_stack'
+    tags:
+      - name: contao.hook
+        hook: prepareFormData
+        priority: -255
