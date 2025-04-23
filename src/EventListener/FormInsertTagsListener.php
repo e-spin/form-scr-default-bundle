@@ -16,12 +16,12 @@ declare(strict_types=1);
 
 namespace Espin\FormScrDefaultBundle\EventListener;
 
-use Contao\Form;
 use Contao\Input;
 use Contao\StringUtil;
+use Espin\FormScrDefaultBundle\EventListener\PrepareFormDataListener;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class FormInsertTags
+class FormInsertTagsListener
 {
     public function __construct(private readonly RequestStack $requestStack)
     {
@@ -30,23 +30,27 @@ class FormInsertTags
     /**
      * Replace the insert tags
      *
-     * @param mixed $varTag
+     * @param string $tag
      *
-     * @return mixed
+     * @return string
      */
-    public function replaceInsertTags(mixed $varTag): mixed
+    public function __invoke(string $tag): string
     {
-        $arrTag = StringUtil::trimsplit('::', $varTag);
+        // Extract tag.
+        $elements = \explode('::', \explode('|', $tag)[0]);
+        $key      = \strtolower($elements[0]);
 
-        if ($arrTag[0] === 'form_rawvalue') {
+        // Session value.
+        if ('form_rawvalue' === $key) {
             $formRawValue = $this->requestStack->getCurrentRequest()?->getSession()
-                ->get(Form::SESSION_KEY)?->getValue()[$arrTag[1]] ?? '';
+                ->get(PrepareFormDataListener::SESSION_KEY)[$elements[1]] ?? '';
 
             return \is_array($formRawValue) ? \serialize($formRawValue) : $formRawValue;
         }
 
-        if ($arrTag[0] === 'form_rawvalue_get') {
-            if (null === ($varValue = Input::get($arrTag[1]))) {
+        // Get value.
+        if ('form_rawvalue_get' === $key) {
+            if (null === ($varValue = Input::get($elements[1]))) {
                 return '';
             }
 
@@ -55,8 +59,9 @@ class FormInsertTags
             return \is_array($varValue) ? \serialize($varValue) : $varValue;
         }
 
-        if ($arrTag[0] === 'form_rawvalue_post') {
-            if (null === ($varValue = Input::post($arrTag[1]))) {
+        // Post value.
+        if ('form_rawvalue_post' === $key) {
+            if (null === ($varValue = Input::post($elements[1]))) {
                 return '';
             }
 
@@ -65,5 +70,4 @@ class FormInsertTags
 
         return false;
     }
-
 }

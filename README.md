@@ -33,7 +33,7 @@ des Formulars erneut gesetzt werden.
 
 Für den Zugriff auf Werte gibt es drei Inserttags:
 
-    {{form_rawvalue::<feldname>}} - zieht die Werte aus der aktuellen Formular-Session
+    {{form_rawvalue::<feldname>}} - zieht die Werte aus der aktuellen/eigenen Formular-Session**
     {{form_rawvalue_get::<feldname>}} - zieht die Werte aus dem entsprechenden GET-Parameter
     {{form_rawvalue_post::<feldname>}} - zieht die Werte aus dem entsprechenden POST-Parameter (ab Version 2.0.2)
 
@@ -43,5 +43,14 @@ Werte für "multiselect" können per "komma-separierter Liste" angegeben werden 
 Die Vorbelegung ist auch über andere geeignete Inserttags möglich.
 
 Mehr zu Installation und Beispielen für form-scr-default unter https://www.e-spin.de/form-scr-default.html
+
+****:**
+Ab Contao 5.0 hat die Session mit den Formulardaten nur noch eine Lebensdauer von 10 Sekunden - man kann dafür auch den
+Insert-Tag ``{{form_session_data::*}}`` verwenden - 
+[siehe Insert-Tags](https://docs.contao.org/manual/de/artikelverwaltung/insert-tags/#verschiedenes).
+
+Ab Version 2.0.5 ist eine eigene Session implementiert, die die Formulardaten dauerhaft für die Session behält und mit
+dem Tag ``{{form_rawvalue::<feldname>}}`` ausgegeben werden kann.
+
 
 ![Screenshot widget](https://github.com/e-spin/form-scr-default-bundle/blob/master/doc/e-spin_form-scr-default.jpg?raw=true "Screenshot widget")
