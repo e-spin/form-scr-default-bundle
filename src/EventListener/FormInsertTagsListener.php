@@ -32,9 +32,9 @@ class FormInsertTagsListener
      *
      * @param string $tag
      *
-     * @return string
+     * @return string|false
      */
-    public function __invoke(string $tag): string
+    public function __invoke(string $tag): string|false
     {
         // Extract tag.
         $elements = \explode('::', \explode('|', $tag)[0]);
