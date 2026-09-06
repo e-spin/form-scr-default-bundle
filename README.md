@@ -5,6 +5,7 @@ button can be predefined dynamically.
 
 Versions:
 
+- Contao ^6.0: ``^2.1``
 - Contao ^5.3: ``^2.0``
 - Contao ^4.9: ``^1.0``
 
@@ -17,6 +18,7 @@ Radiobutton dynamisch vorgegeben werden.
 
 Versionen:
 
+- Contao ^6.0: ``^2.1``
 - Contao ^5.3: ``^2.0``
 - Contao ^4.9: ``^1.0``
 
